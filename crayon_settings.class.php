@@ -72,6 +72,7 @@ class CrayonSettings {
     const PLAIN_TOGGLE = 'plain-toggle';
     const SHOW_PLAIN = 'show-plain';
     const DISABLE_RUNTIME = 'runtime';
+    const DISABLE_DATE = 'disable-date';
     const TOUCHSCREEN = 'touchscreen';
     const DISABLE_ANIM = 'disable-anim';
     const ERROR_LOG = 'error-log';
@@ -83,8 +84,8 @@ class CrayonSettings {
     const EFFICIENT_ENQUEUE = 'efficient-enqueue';
     const CAPTURE_PRE = 'capture-pre';
     const CAPTURE_MINI_TAG = 'capture-mini-tag';
-    const MIXED = 'mixed';
-    const SHOW_MIXED = 'show_mixed';
+    const ALTERNATE = 'alternate';
+    const SHOW_ALTERNATE = 'show_alternate';
     const PLAIN_TAG = 'plain_tag';
     const SHOW_PLAIN_DEFAULT = 'show-plain-default';
     const ENQUEUE_THEMES = 'enqueque-themes';
@@ -107,12 +108,16 @@ class CrayonSettings {
     const RANGES = 'ranges';
     const TAG_EDITOR_FRONT = 'tag-editor-front';
     const TAG_EDITOR_SETTINGS = 'tag-editor-front-hide';
+    const TAG_EDITOR_ADD_BUTTON_TEXT = 'tag-editor-button-add-text';
+    const TAG_EDITOR_EDIT_BUTTON_TEXT = 'tag-editor-button-edit-text';
+    const TAG_EDITOR_QUICKTAG_BUTTON_TEXT = 'tag-editor-quicktag-button-text';
     const WRAP_TOGGLE = 'wrap-toggle';
     const WRAP = 'wrap';
     const EXPAND = 'expand';
     const EXPAND_TOGGLE = 'expand-toggle';
     const MINIMIZE = 'minimize';
     const IGNORE = 'ignore';
+    const DELAY_LOAD_JS = 'delay-load-js';
 
     private static $cache_array;
 
@@ -210,6 +215,7 @@ class CrayonSettings {
             new CrayonSetting(self::DISABLE_ANIM, FALSE),
             new CrayonSetting(self::TOUCHSCREEN, TRUE),
             new CrayonSetting(self::DISABLE_RUNTIME, FALSE),
+            new CrayonSetting(self::DISABLE_DATE, ''),
             new CrayonSetting(self::ERROR_LOG, TRUE),
             new CrayonSetting(self::ERROR_LOG_SYS, TRUE),
             new CrayonSetting(self::ERROR_MSG_SHOW, TRUE),
@@ -219,8 +225,8 @@ class CrayonSettings {
             new CrayonSetting(self::EFFICIENT_ENQUEUE, FALSE),
             new CrayonSetting(self::CAPTURE_PRE, TRUE),
             new CrayonSetting(self::CAPTURE_MINI_TAG, FALSE),
-            new CrayonSetting(self::MIXED, TRUE),
-            new CrayonSetting(self::SHOW_MIXED, TRUE),
+            new CrayonSetting(self::ALTERNATE, TRUE),
+            new CrayonSetting(self::SHOW_ALTERNATE, TRUE),
             new CrayonSetting(self::PLAIN_TAG, FALSE),
             new CrayonSetting(self::ENQUEUE_THEMES, TRUE),
             new CrayonSetting(self::ENQUEUE_FONTS, TRUE),
@@ -242,11 +248,15 @@ class CrayonSettings {
             new CrayonSetting(self::RANGES, TRUE),
             new CrayonSetting(self::TAG_EDITOR_FRONT, FALSE),
             new CrayonSetting(self::TAG_EDITOR_SETTINGS, TRUE),
+            new CrayonSetting(self::TAG_EDITOR_ADD_BUTTON_TEXT, crayon__('Add Code')),
+            new CrayonSetting(self::TAG_EDITOR_EDIT_BUTTON_TEXT, crayon__('Edit Code')),
+            new CrayonSetting(self::TAG_EDITOR_QUICKTAG_BUTTON_TEXT, 'crayon'),
             new CrayonSetting(self::WRAP_TOGGLE, TRUE),
             new CrayonSetting(self::WRAP, FALSE),
             new CrayonSetting(self::EXPAND, FALSE),
             new CrayonSetting(self::EXPAND_TOGGLE, TRUE),
-            new CrayonSetting(self::MINIMIZE, FALSE)
+            new CrayonSetting(self::MINIMIZE, FALSE),
+            new CrayonSetting(self::DELAY_LOAD_JS, FALSE)
         );
 
         $this->set($settings);
@@ -387,7 +397,7 @@ class CrayonSettings {
      * This is used when saving form an HTML form to the db, and also when reading from the db
      * back into the global settings.
      * @param string $name
-     * @param mixed $value
+     * @param alternate $value
      */
     public static function validate($name, $value) {
         if (!is_string($name)) {
